@@ -46,7 +46,7 @@ angular.module('LS-APPMON.Home', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.resi
             { name: 'Host Server', field: 'AppServer', enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader },
             { name: 'HeartBeat URL', field: 'AppHeartBeat', enableCellEdit: true, enableColumnMenus: false, enableFiltering: false, cellTemplate: '<div style="padding: 5px;"><a href="{{row.entity.AppHeartBeat}}" target="_blank">Heartbeat Link</a></div>' },
             { name: 'Current Status', field: 'LastStatus', enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader },
-            { name: '', field: 'id', enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader, cellTemplate: '<div id="{{row.entity.id}}_buttonDiv"> <button ng-click="grid.appScope.deleteSystem(row.entity.id, row.entity.AppName)" class="btn gridbutton" id="deleteButton"> Delete </button></div>' }
+            { name: 'Delete', field: 'id', width: "150", cellTemplate: '<div id="{{row.entity.id}}_buttonDiv"> <button ng-click="grid.appScope.deleteSystem(row.entity.id, row.entity.AppName)" class="btn gridbutton" id="deleteButton"> Delete </button> <button ng-click="grid.appScope.deleteSystem(row.entity.id, row.entity.AppName)" class="btn gridbutton" id="deleteButton"> Ping </button></div>' }
         ]
     };
 
@@ -64,7 +64,23 @@ angular.module('LS-APPMON.Home', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.resi
     };
 
     $scope.deleteSystem = function(id, AppName){
-        alert("Delete: " + AppName);
+        var changeSet = {
+	        "SystemUpdateList":[{
+		        "id": id
+	        }]
+        };
+
+         $http({
+            method: "post",
+            url: "MockData/SystemList.json",
+            headers: {
+                'content-type': 'application/json'
+            },
+            data: changeSet
+        })
+        .success(function(data, returnval) {
+            $scope.loadData();
+        });
     };
 
     $scope.Load();
