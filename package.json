@@ -1,0 +1,38 @@
+{
+  "name": "",
+  "private": false,
+  "version": "1.0.0",
+  "description": "",
+  "repository": "",
+  "license": "MIT",
+  "devDependencies": {
+    "angular": "~1.4.0",
+    "angular-loader": "~1.4.0",
+    "angular-mocks": "~1.4.0",
+    "angular-route": "~1.4.0",
+    "grunt": "0.4.5",
+    "grunt-bower-task": "^0.4.0",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-copy": "^0.8.1",
+    "http-server": "^0.6.1",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.9",
+    "karma-coverage": "^0.5.0",
+    "karma-jasmine": "^0.3.5",
+    "karma-junit-reporter": "^0.2.2",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "phantomjs": "^1.9.18",
+    "protractor": "^2.1.0",
+    "shelljs": "^0.2.6"
+  },
+  "scripts": {
+    "test": "karma start karma.conf.js",
+    "test-single-run": "karma start karma.conf.js  --single-run",
+    "protractor": "protractor e2e-tests/protractor.conf.js"
+  },
+  "dependencies": {
+    "angular-ui-bootstrap": "^0.14.3",
+    "bootstrap": "^3.3.6",
+    "ng-dialog": "^0.5.6"
+  }
+}

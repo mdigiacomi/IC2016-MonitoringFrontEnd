@@ -1,0 +1,56 @@
+<div style="float:left">
+
+<button type="button" id="addData" class="btn" ng-click="AddNewSystem">Add</button>
+<div id="statsMessage" ng-bind="search.updateStatus" style="200px !important; float:right; padding-left:10px; "></div>
+</div>
+
+<br />
+<br />
+<div ui-grid="gridOptions" ui-grid-resize-columns  ui-grid-auto-resize class="grid" ></div>
+
+<style>
+.grid {
+  width: 100%;
+  height: 78%;
+  font-size: 10px;
+}
+
+.ui-grid-render-container-body .ui-grid-viewport{
+	overflow-x: auto !important;
+}
+
+.ui-grid-cell{
+	border-right: 0px;
+}
+.btn{
+	font-size: 10px; 
+}
+
+.gridbutton{
+	padding: 4px 8px;
+	margin: 1px;
+}
+
+.ui-grid-header-viewport{
+	height:25px;
+}
+
+.ui-grid-header-cell .ui-grid-cell-contents {
+     height: 48px;
+     white-space: normal;
+     -ms-text-overflow: clip;
+     -o-text-overflow: clip;
+     text-overflow: clip;
+     overflow: visible;
+}
+.ui-grid-header-viewport {
+    height: 48px;
+}
+
+.wrap {
+  white-space: normal;
+}
+.wrap .labels {
+     display: inline-block;
+}
+</style>

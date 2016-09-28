@@ -1,0 +1,53 @@
+
+<html lang="en" ng-app="LS-APPMON" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AppMon</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="app.css" />
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" />
+  
+  <link rel="stylesheet" href="scripts/ui-grid/ui-grid.css" type="text/css">
+
+</head>
+<body>
+  <div class="navbar navbar-inverse" role="navigation" bs-navbar style="border-radius: 0px !important;">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#/home">      
+          <span class="glyphicon glyphicon-home"></span> Lobo Solitario : App Monitoring
+      </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#/"></a></li>
+    </ul>
+  </div>
+
+
+
+  <div ng-view class="container" style="width: 90% !important;"></div>
+
+  <div class="navbar navbar-inverse navbar-fixed-bottom" style="padding-top: 20px; padding-bottom: 20px;">
+    <div class="container">
+      <div style="color: #9d9d9d; text-align:center;">
+        <span app-version> &nbsp;
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.1.4/ui-bootstrap.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.1.4/ui-bootstrap-tpls.js"></script>
+
+  <script src="scripts/ui-grid/ui-grid.js"></script>
+  
+  <script src="app.js"></script>
+
+  <script src="Controllers/HomeCtrl.js"></script>
+</body>
+</html>

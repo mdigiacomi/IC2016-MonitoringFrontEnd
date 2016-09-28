@@ -1,0 +1,34 @@
+{
+    "SystemList": [
+        {
+            "id" : "1",
+	        "AppName": "AppMon-FrontEnd",
+            "AppDesc": "Application Monitoring Frint End Interface",
+            "AppURL": "http://10.150.165.18:8085/AppMon-FrontEnd/",
+            "AppVersion": "1.0.0",
+            "AppServer": "i5481",
+	        "AppHeartBeat": "http://10.150.165.18:8085/AppMon-FrontEnd/MockData/Heartbeat.json",
+            "LastStatus" : "Online",
+	        "Additional_Properties" : [
+		        {
+			        "SE-TEAM": "Enterprise Collaboration"
+		        }
+	        ]
+        },
+        {
+            "id" : "2",
+	        "AppName": "Test App Beta",
+            "AppDesc": "Testing Beta Application",
+            "AppURL": "http://10.150.165.18:8085/",
+            "AppVersion": "1.5.0",
+            "AppServer": "i5481",
+	        "AppHeartBeat": "http://10.150.165.18:8085/AppMon-FrontEnd/MockData/Heartbeat.json",
+            "LastStatus" : "OffLine",
+	        "Additional_Properties" : [
+		        {
+			        "SE-TEAM": "Enterprise Collaboration"
+		        }
+	        ]
+        }
+    ]
+}

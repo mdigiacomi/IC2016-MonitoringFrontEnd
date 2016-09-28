@@ -1,0 +1,16 @@
+{
+    "status": 200,
+    "statusMessage": "System Up",
+    "Dependencies": [
+        {
+            "Name": "Oracle",
+            "status": 200,
+            "statusMessage": "Query Executed Successfully"
+        },
+        {
+            "Name": "Portal",
+            "status": 200,
+            "statusMessage": "Portal Responded Successfully"
+        }
+    ]
+}
