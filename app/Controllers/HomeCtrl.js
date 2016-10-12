@@ -42,10 +42,6 @@ angular.module('LS-APPMON.Home', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.resi
             { name: 'App Description', field: 'AppDesc', width: "200", enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader },
             { name: 'App URL', field: 'AppURL', enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader, cellTemplate: '<div style="padding: 5px;"><a href="{{row.entity.AppURL}}" target="_blank">App Link</a></div>' },
             { name: 'App Version', field: 'AppVersion', enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader },
-            { name: 'Security', field: 'Symbol', enableCellEdit: true, headerCellClass: $scope.highlightFilteredHeader },
-            { name: 'Host Server', field: 'AppServer', enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader },
-            { name: 'HeartBeat URL', field: 'AppHeartBeat', enableCellEdit: true, enableColumnMenus: false, enableFiltering: false, cellTemplate: '<div style="padding: 5px;"><a href="{{row.entity.AppHeartBeat}}" target="_blank">Heartbeat Link</a></div>' },
-            { name: 'Current Status', field: 'LastStatus', enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader },
             { name: 'Delete', field: 'id', width: "150", cellTemplate: '<div id="{{row.entity.id}}_buttonDiv"> <button ng-click="grid.appScope.deleteSystem(row.entity.id, row.entity.AppName)" class="btn gridbutton" id="deleteButton"> Delete </button> <button ng-click="grid.appScope.deleteSystem(row.entity.id, row.entity.AppName)" class="btn gridbutton" id="deleteButton"> Ping </button></div>' }
         ]
     };
@@ -53,7 +49,7 @@ angular.module('LS-APPMON.Home', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.resi
     $scope.Load = function(){
         $http({
                 method: "get",
-                url: "MockData/SystemList.json",
+                url: "http://dev.michaeldigiacomi.com/IC2016/ESAppHealth/api/Loader?IndexName=appinfo&IndexType=appinfo",
                 headers: {
                     'content-type': 'application/json'
                 }
