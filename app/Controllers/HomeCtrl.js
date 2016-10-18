@@ -52,7 +52,7 @@ angular.module('LS-APPMON.Home', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.resi
     $scope.Load = function(){
         $http({
                 method: "get",
-                url: "http://dev.michaeldigiacomi.com/IC2016/ESAppHealth/api/appinfo?IndexName=appinfo&IndexType=appinfo",
+                url: "http://localhost/elasticfacade/api/appinfo/appinfo/appinfo",
                 headers: {
                     'content-type': 'application/json'
                 }
@@ -66,7 +66,7 @@ angular.module('LS-APPMON.Home', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.resi
 
          $http({
             method: "DELETE",
-            url: "http://dev.michaeldigiacomi.com/IC2016/ESAppHealth/api/appinfo/appinfo/appinfo/" + id,
+            url: "http://localhost/elasticfacade/api/appinfo/appinfo/appinfo/" + id,
             headers: {
                 'content-type': 'application/json'
             }
@@ -83,7 +83,7 @@ angular.module('LS-APPMON.Home', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.resi
 
         $http({
             method: "post",
-            url: "http://dev.michaeldigiacomi.com/IC2016/HealthCheck/api/HealthCheck",
+            url: "http://localhost/elasticfacade/api/HealthCheck",
             headers: {
                 'content-type': 'application/json'
             },
