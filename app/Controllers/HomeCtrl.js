@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('LS-APPMON.Home', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.resizeColumns'])
+angular.module('LS-APPMON.Home', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.exporter', 'ui.grid.pinning', 'ui.grid.resizeColumns', 'ui.grid.edit', 'ui.grid.cellNav', 'ui.grid.rowEdit'])
     .directive('setRowHeight', ['$timeout', function($timeout) {
         return {
             restrict: 'A',
@@ -27,32 +27,39 @@ angular.module('LS-APPMON.Home', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.resi
         };
     }])
 
-.controller('HomeCtrl', function($scope, $http, uiGridConstants) {
+.controller('HomeCtrl', function($scope, $http, uiGridConstants, $timeout) {
 
     $scope.gridOptions = {
+        enableFiltering: true,
+        enableSorting: true,
+        enableGridMenu: true,
+        exporterCsvFilename: 'SystemList.csv',
         enableVerticalScrollbar: 2,
         enableHorizontalScrollbar: 2,
-        enableSorting: true,
         onRegisterApi: function(gridApi) {
             $scope.gridApi = gridApi;
         },
         columnDefs: [
-            { name: 'ID', field: 'ID', enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader },
-            { name: 'App Name', field: 'AppName', enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader },
-            { name: 'App Version', field: 'AppVersion', enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader },
-            { name: 'App Description', field: 'AppDesc', width: "200", enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader },
-            { name: 'Machine Name', field: 'AdditionalParameters["Machine Name"]', enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader },
-            { name: '.Net Version', field: 'AdditionalParameters["Net Version"]', enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader },
-            { name: 'Service Account', field: 'AdditionalParameters["User"]', enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader },
-            { name: 'App URL', field: 'AppURL', enableCellEdit: true, enableColumnMenus: false, headerCellClass: $scope.highlightFilteredHeader, cellTemplate: '<div style="padding: 5px;"><a href="{{row.entity.AppURL}}" target="_blank">App Link</a></div>' },
-            { name: 'Delete', field: 'id', width: "150", cellTemplate: '<div id="{{row.entity.ID}}_buttonDiv"> <button ng-click="grid.appScope.deleteSystem(row.entity.ID, row.entity.AppName)" class="btn gridbutton" id="deleteButton"> Delete </button> <button ng-click="grid.appScope.pingSystem(row.entity.AppName, row.entity.AppURL)" class="btn gridbutton" id="deleteButton"> Ping </button></div>' }
+            { name: '', field: 'Status', width: "30", height: "39", enableFiltering: false, cellTemplate: '<div style="padding: 5px;" class="{{row.entity.AppStatus}}" >&nbsp;</div>' },            
+            { name: 'ID', field: 'ID', visible: false },
+            { name: 'App Name', field: 'AppName' },
+            { name: 'App Version', width: "70", field: 'AppVersion' , enableFiltering: false},
+            { name: 'App Description', field: 'AppDesc', width: "200", visible: false },
+            { name: 'Machine Name', width: "120", field: 'AdditionalParameters["Machine Name"]' },
+            { name: 'Machine OS', width: "160", field: 'AdditionalParameters["Machine OS"]' , enableFiltering: false},
+            { name: '.Net Version', width: "100", field: 'AdditionalParameters["Net Version"]' },
+            { name: 'Service Account', width: "90", field: 'AdditionalParameters["User"]' },
+            { name: 'User Domain', width: "90", field: 'AdditionalParameters["User Domain"]' },
+            { name: 'App URL', field: 'AppURL', width: "75", enableFiltering: false, cellTemplate: '<div style="padding: 5px;"><a href="{{row.entity.AppURL}}" target="_blank">App Link</a></div>' },
+            { name: 'Notifications', width: "175", enableFiltering: false, enableCellEditOnFocus:true, field: 'NotificationEmail' },
+            { name: 'Actions', field: 'id', width: "180", enableFiltering: false, cellTemplate: '<div id="{{row.entity.ID}}_buttonDiv"><button class="btn gridbutton">Update</button><button ng-click="grid.appScope.deleteSystem(row.entity.ID, row.entity.AppName)" class="btn gridbutton" id="deleteButton"> Delete </button> <button ng-click="grid.appScope.pingSystem(row)" class="btn gridbutton" id="deleteButton"> Ping </button></div>' }
         ]
     };
 
     $scope.Load = function(){
         $http({
                 method: "get",
-                url: "http://localhost/elasticfacade/api/appinfo/appinfo/appinfo",
+                url: "http://127.0.0.1/elasticfacade/api/appinfo/appinfo/appinfo?",
                 headers: {
                     'content-type': 'application/json'
                 }
@@ -66,7 +73,7 @@ angular.module('LS-APPMON.Home', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.resi
 
          $http({
             method: "DELETE",
-            url: "http://localhost/elasticfacade/api/appinfo/appinfo/appinfo/" + id,
+            url: "http://127.0.0.1/elasticfacade/api/appinfo/appinfo/appinfo/" + id,
             headers: {
                 'content-type': 'application/json'
             }
@@ -76,23 +83,32 @@ angular.module('LS-APPMON.Home', ['ui.grid', 'ui.grid.autoResize', 'ui.grid.resi
         });
     };
 
-    $scope.pingSystem = function(AppName, AppURL){
+    $scope.pingSystem = function(row){
+        
         var changeSet = {
-	        AppName : AppURL
+	        AppName : row.entity.AppName,
+	        AppUrl : row.entity.AppURL
         };
 
         $http({
             method: "post",
-            url: "http://localhost/elasticfacade/api/HealthCheck",
+            url: "http://127.0.0.1/HealthCheck/api/HealthCheck",
             headers: {
                 'content-type': 'application/json'
             },
             data: changeSet
         })
         .success(function(data, returnval) {
-            $scope.Load();
+            row.entity.AppStatus = data[0].Status;
         });
     }
 
     $scope.Load();
+
+    (function tick() {
+        $scope.Load();
+        console.log("Reloading Table");
+        $timeout(tick, 2000);
+    })();
+
 });

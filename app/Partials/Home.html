@@ -1,12 +1,12 @@
 <div style="float:left">
 
 <button type="button" id="addData" class="btn" ng-click="AddNewSystem">Add</button>
-<div id="statsMessage" ng-bind="search.updateStatus" style="200px !important; float:right; padding-left:10px; "></div>
+<div id="statsMessage" ng-bind="$scope.message" style="200px !important; float:right; padding-left:10px; "></div>
 </div>
 
 <br />
 <br />
-<div ui-grid="gridOptions" ui-grid-resize-columns  ui-grid-auto-resize class="grid" ></div>
+<div ui-grid="gridOptions"  class="grid" ui-grid-resize-columns ui-grid-exporter ui-grid-auto-resize ui-grid-edit ui-grid-cellnav ui-grid-row-edit ui-grid-pinning ></div>
 
 <style>
 .grid {
@@ -31,12 +31,8 @@
 	margin: 1px;
 }
 
-.ui-grid-header-viewport{
-	height:25px;
-}
-
 .ui-grid-header-cell .ui-grid-cell-contents {
-     height: 48px;
+     height: 34px;
      white-space: normal;
      -ms-text-overflow: clip;
      -o-text-overflow: clip;
@@ -44,7 +40,7 @@
      overflow: visible;
 }
 .ui-grid-header-viewport {
-    height: 48px;
+    height: 56px;
 }
 
 .wrap {

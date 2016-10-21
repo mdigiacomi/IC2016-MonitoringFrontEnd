@@ -29,4 +29,29 @@
   padding: 0;
 }
 
+.OK
+{
+   background-color: green;
+   color:green;
+   width:85%;
+   height:85%;
+   border-radius: 50%;
+}
+
+.ServiceUnavailable {
+  background-color: red;
+  color:red;
+  width:85%;
+  height:85%;
+  border-radius: 50%;
+}
+
+.0 {
+  background-color: red;
+  color:red;
+  width:85%;
+  height:85%;
+  border-radius: 50%;
+}
+
 

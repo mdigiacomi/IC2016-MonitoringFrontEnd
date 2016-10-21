@@ -30,14 +30,9 @@
 
   <div ng-view class="container" style="width: 90% !important;"></div>
 
-  <div class="navbar navbar-inverse navbar-fixed-bottom" style="padding-top: 20px; padding-bottom: 20px;">
-    <div class="container">
-      <div style="color: #9d9d9d; text-align:center;">
-        <span app-version> &nbsp;
-      </div>
-    </div>
-  </div>
-
+  <script src="http://localhost/HealthCheck/Scripts/jquery-3.1.1.js"></script>
+  <script src="http://localhost/HealthCheck/Scripts/jquery.signalR-2.2.1.js"></script>
+  <script src="http://localhost/HealthCheck/signalr/hubs"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.js"></script>
   
@@ -49,5 +44,6 @@
   <script src="app.js"></script>
 
   <script src="Controllers/HomeCtrl.js"></script>
+
 </body>
 </html>
